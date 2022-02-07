@@ -2,7 +2,6 @@ from genericpath import exists
 from json.encoder import ESCAPE_ASCII
 from cv2 import waitKey
 from flask import Flask, Response, render_template, request, flash, redirect, url_for
-from .config import BaseConfig
 import cv2
 import mediapipe as mp
 import os
@@ -11,7 +10,6 @@ import time
 
 #Initialize Flask Application
 app = Flask(__name__)
-app.config.from_object(BaseConfig)
 
 path = 'Output_Images'
 os.makedirs(path, exist_ok=True)
