@@ -6,7 +6,6 @@ import cv2
 import mediapipe as mp
 import os
 import uuid
-import time
 
 #Initialize Flask Application
 app = Flask(__name__)
@@ -24,7 +23,6 @@ hands = mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5
 #Main Page
 @app.route('/')
 def index():
-    # Video Streaming Home Page
     templateData = {
         'title':'Image Streaming',
         'len' : len(gestures),

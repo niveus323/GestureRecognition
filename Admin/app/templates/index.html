@@ -14,11 +14,7 @@
 <body>
 
 <div class="container">
-    <!-- <div class="row">
-        <div class="col-lg-8  offset-lg-2">
-            <img src="{{ url_for('video_feed') }}" width="100%">
-        </div>
-    </div> -->
+    <video id="camera"></video>
     <div class="row">
         <div class="col-lg-8  offset-lg-2">
             {%for i in range(0, len)%}
@@ -31,4 +27,5 @@
     </div>
 </div>
 </body>
+<script src="{{url_for('static', filename='webcam.js')}}"></script>
 </html>
