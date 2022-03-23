@@ -7,4 +7,3 @@ class BaseConfig(object):
     DEBUG = True
     use_reloader = True
 
-    

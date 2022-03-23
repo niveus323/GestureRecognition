@@ -1,3 +1,31 @@
-.btn_gesture_record > input {
-    visibility: hidden;
+.row {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    background-color: antiquewhite;
+}
+
+.input_video {
+    width: 600px;
+    height: 600px;
+    flex: 2;
+    background-color: bisque;
+    padding: 10px;
+}
+
+.row > div {
+    flex: 1;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.row > div > select {
+    margin: 5px 0;
+}
+
+.record_btns {
+    flex-direction: column;
+}
+.record_btns > button {
+    margin : 5px 0;
 }
