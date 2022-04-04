@@ -34,7 +34,7 @@ def record_video():
         model = request.form.get('model')
         type = request.form.get('type')
         filename = '{}.mp4'.format(datetime.now().strftime('%Y-%m-%d %H_%M_%S'))
-        dir = os.path.join('{0}/{1}/{2}/{3}.mp4'.format(path, model, type, filename))
+        dir = os.path.join('{0}/{1}/{2}/{3}'.format(path, model, type, filename))
         video.save(dir)
     except Exception:
         print(Exception)
@@ -89,4 +89,4 @@ def health_check():
     return "pong"
 
 if __name__== "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=80)
