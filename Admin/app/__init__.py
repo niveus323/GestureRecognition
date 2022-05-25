@@ -3,6 +3,7 @@ from flask import Flask, Response, jsonify, render_template, request, flash, red
 # from werkzeug import secure_filename
 import os
 import cv2
+# from GestureRecognizer import recognizeGesture 
 
 #Initialize Flask Application
 app = Flask(__name__)
@@ -86,7 +87,16 @@ def gen(video):
 
 @app.route('/health_check')
 def health_check():
+    print("called!")
     return "pong"
+
+@app.route('/gesture', methods=['POST'])
+def gesture():
+    result = request.form.get('result')
+    print(result)
+    # input : LandmarkList List<NormalizedLandmark> 
+    # recognizeGesture(result)
+    return {"result" : "success"}
 
 if __name__== "__main__":
     app.run(debug=True, host='0.0.0.0', port=80)
