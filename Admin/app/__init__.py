@@ -1,15 +1,17 @@
 from datetime import datetime
 from flask import Flask, Response, jsonify, render_template, request, flash, redirect, safe_join, send_from_directory, url_for
 # from werkzeug import secure_filename
-import os
+import os, sys
 import cv2
-# from GestureRecognizer import recognizeGesture 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+from Machine.GestureRecognizer import recognizeGesture
 
 #Initialize Flask Application
 app = Flask(__name__)
 
 path = 'Output'
 os.makedirs(path, exist_ok=True)
+
 
 models = {
     'Gesture' : ["Tap", "Double_Tap", "Grab", "Drop", "Pinch", "Spread", "Slide_Left", "Slide_Right"],
@@ -87,16 +89,16 @@ def gen(video):
 
 @app.route('/health_check')
 def health_check():
-    print("called!")
     return "pong"
 
 @app.route('/gesture', methods=['POST'])
 def gesture():
-    result = request.form.get('result')
-    print(result)
-    # input : LandmarkList List<NormalizedLandmark> 
-    # recognizeGesture(result)
-    return {"result" : "success"}
+    result = request.get_json('result')
+    result = result['result'].splitlines()
+    for i in range(len(result)):
+        result[i] = result[i].split()
+
+    return jsonify(recognizeGesture(result))
 
 if __name__== "__main__":
     app.run(debug=True, host='0.0.0.0', port=80)
