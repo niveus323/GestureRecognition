@@ -1,9 +1,8 @@
 import numpy as np
-import os
 from keras.models import load_model
 
 # 모델 load
-model = load_model(os.path.abspath(os.path.dirname(__file__))+'/Models/model.h5')
+model = load_model('./Models/model.h5')
 # 제스처 종류
 actions = ['a', 'b', 'c']
 # 데이터 시퀀스 길이, 녹화시간
@@ -11,8 +10,6 @@ seqLength = 10
 
 angleData = []
 actionPredicted = []
-
-# result는 [[x,y,z]....] 형식
 
 def recognizeGesture(result):
 # 손 있을 때

@@ -41,23 +41,6 @@
     <div class="row">
         <video class="input_video"></video>
         <div class="col-lg-8">
-            <select class="form-control" name="model" onchange="selectModel(this.value)">
-                <option value="Default">Default</option>
-                {%for model in models%}
-                <option value="{{model}}">{{model}}</option>
-                {%endfor%}
-            </select>
-            <select class="form-control select-types" id="type-Default">
-                <option>Default</option>
-            </select>
-            {%for model, types in models.items()%}
-                <select class="form-control select-types" id="type-{{model}}" name="type" style="display: none;">
-                    <option>Default</option>
-                    {%for type in types%}
-                    <option>{{type}}</option>
-                    {%endfor%}
-                </select>
-            {%endfor%}
             <div class="record_btns">
                 <button class="btn btn-primary btn-lg disabled" id="btn_start">녹화시작</button>
                 <button class="btn btn-primary btn-lg disabled" id="btn_stop">녹화종료</button>

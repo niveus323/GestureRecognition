@@ -49,10 +49,11 @@
                 </script>
             </ol>
         </nav>
+        <button class="btn btn-outline-secondary btn-option" onclick="location.href='/drive/download'">다운로드</button>
         {% if video %}
         <form method="POST" action="video_delete">
             <input type="text" name="dirs" value="{{route}}" hidden="True">
-            <button type="submit" class="btn btn-outline-secondary delete-btn">삭제</button>
+            <button type="submit" class="btn btn-outline-secondary btn-option">삭제</button>
         </form>
         {% endif %}
     </div>

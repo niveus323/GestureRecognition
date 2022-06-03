@@ -26,6 +26,6 @@
 .record_btns {
     flex-direction: column;
 }
-.record_btns > button {
+button {
     margin : 5px 0;
 }

@@ -19,17 +19,17 @@ startButton.click(function() {
     console.log(recordedBlob);
     let formData = new FormData();
     formData.append('video', recordedBlob, 'video');
-    formData.append('model', $('select[name=model]').val());
-    formData.append('type', currentTypeSelect.val());
+    // formData.append('model', $('select[name=model]').val());
+    formData.append('duration', (endTime - startTime)/1000 )
     return new Promise((resolve, reject) => {
       try {
         axios.post('/video',formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
-          },
-          responseType: 'blob'
+          }
         }).then((response) => {
-          console.log('전송 성공!')
+          console.log(response.data['result'])
+          window.location.href = response.data['result']
           resolve();
         }).catch((error) => {
           console.log('전송 실패')
@@ -41,11 +41,11 @@ startButton.click(function() {
     })
   });
 });
-
+let startTime, endTime;
 function startRecording(stream) {
   let recorder = new MediaRecorder(stream); //Recorder 생성
-
   recorder.ondataavailable = event => data.push(event.data); //Blob는 Array data에 저장된다.
+  startTime = new Date();
   recorder.start(); //녹화 시작
   console.log("녹화 시작!");
   
@@ -62,6 +62,7 @@ function startRecording(stream) {
 function stopRecording(stream, recorder) {
   if(recorder.state == "recording"){
     recorder.stop();
+    endTime = new Date();
     console.log("녹화 종료!");
     stream.getTracks().forEach(track => track.stop());
   } else {
