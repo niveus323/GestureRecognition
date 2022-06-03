@@ -19,8 +19,6 @@ startButton.click(function() {
     console.log(recordedBlob);
     let formData = new FormData();
     formData.append('video', recordedBlob, 'video');
-    // formData.append('model', $('select[name=model]').val());
-    formData.append('duration', (endTime - startTime)/1000 )
     return new Promise((resolve, reject) => {
       try {
         axios.post('/video',formData, {
@@ -28,8 +26,9 @@ startButton.click(function() {
             'Content-Type': 'multipart/form-data'
           }
         }).then((response) => {
-          console.log(response.data['result'])
-          window.location.href = response.data['result']
+          filename = response.data['filename']
+          duration = (endTime - startTime)/1000
+          window.location.href = "http://www.icehandtracking.com/video?filename="+filename+"&duration="+duration
           resolve();
         }).catch((error) => {
           console.log('전송 실패')

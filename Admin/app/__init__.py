@@ -34,7 +34,6 @@ def index():
 def record_video():
     try:
         video = request.files['video']
-        duration = request.form.get('duration')
         filename = '{}.mp4'.format(datetime.now().strftime('%Y_%m_%d_%H_%M_%S'))
         dir = '{0}/{1}'.format(tempPath, filename)
         video.save(dir)
@@ -42,17 +41,17 @@ def record_video():
         print(Exception)
         return {"result" : "fail"}
     else:
-        return {"result": url_for('show_video', filename=filename, duration=duration)}
+        return {"filename" : filename} 
 
 @app.route('/video', methods=['GET'])
 def show_video():
-    filename = request.args.get('filename')
+    filename = request.args.get('filename', type=str)
     if 'Output/' in filename:
         dir = filename
     else:
         dir = 'Output/'+filename
     video = '{0}/{1}'.format(staticPath, dir)
-    duration = request.args.get('duration')
+    duration = request.args.get('duration', type=float)
     result = request.args.get('result')
     cap = cv2.VideoCapture(video)
     fps = int(request.args.get('fps', 0))
@@ -66,7 +65,7 @@ def show_video():
                 cap.release()
                 break
             num_frames += 1
-        fps = float(num_frames) / float(duration)
+        fps = float(num_frames) / duration
     templateData = {
         'title' : 'Video Result',
         'video' : dir,
