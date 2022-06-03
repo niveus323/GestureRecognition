@@ -168,11 +168,13 @@ def health_check():
 @app.route('/video/save', methods=['POST'])
 def save_video():
     type = request.form.get('type')
+    original = request.form.get('original')
     filename = request.form.get('filename')
     duration = request.form.get('duration')
+    fps = request.form.get('fps')
     shutil.move('./app/static/{0}'.format(filename), 'Output/{0}'.format(type))
 
-    return redirect(url_for('show_video', filename=filename, duration=duration))
+    return redirect(url_for('show_video', filename=original, duration=duration, fps=fps))
 
 @app.route('/video/exit')
 def exit_trimer():

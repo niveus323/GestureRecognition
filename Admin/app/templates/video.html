@@ -79,7 +79,9 @@
         </div>
         <form action="/video/save" method="POST">
             <div class="col">
-                <input type="hidden" value="{{video}}" name="filename">
+                <input type="hidden" value="{{result}}" name="filename">
+                <input type="hidden" value="{{video}}" name="original">
+                <input type="hidden" value="{{fps}}" name="fps">
                 <input type="hidden" value="{{length}}" name="duration">
                 <select class="form-control" name="type">
                     <option value="Default">Default</option>
