@@ -64,6 +64,9 @@
             <div class="col">
                 <form action="/video/exit" method="GET">
                     <input type="hidden" value="{{video}}" name="path">
+                    {% if result %}
+                    <input type="hidden" value="{{result}}" name="resultPath">
+                    {% endif %}
                     <input type="submit" class="btn btn-primary btn-lg" value="편집 종료">
                 </form>
             </div>

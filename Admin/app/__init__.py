@@ -126,7 +126,6 @@ def video_edit():
     start = request.form.get('start')
     end = request.form.get('end')
     duration = request.form.get('duration')
-    result = request.form.get('result')
     fps = request.form.get('fps')
     fps = int(fps.split('.')[0])
     cap = cv2.VideoCapture(realPath)
@@ -179,8 +178,10 @@ def save_video():
 @app.route('/video/exit')
 def exit_trimer():
     path = request.args.get('path')
+    resultPath = request.args.get('resultPath')
     os.remove('{0}/{1}'.format(staticPath, path))
-    return redirect('/')
+    os.remove('{0}/{1}'.format(staticPath, resultPath))
+    return redirect('https://d2x433i70n1kdv.cloudfront.net/')
 
 @app.route('/drive/download')
 def download_Output():
@@ -194,6 +195,13 @@ def download_Output():
 
     memory_file.seek(0)    
     return send_file(memory_file, attachment_filename='Output.zip', as_attachment=True)
+
+@app.route('/model/download')
+def download_model():
+    file_name = os.path.dirname(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__)))))
+    print(file_name)
+    file_name = os.path.join(os.path.abspath(file_name),"Machine","Models","tflite","model.tflite")
+    return send_file(file_name, mimetype="application/tflite")
 
 if __name__== "__main__":
     app.run(debug=True, host='0.0.0.0', port=80)
